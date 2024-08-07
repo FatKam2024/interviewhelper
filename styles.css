@@ -89,7 +89,19 @@ select {
     background-color: #e9e9e9;
     border-radius: 4px;
 }
+.answer h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
 
+.answer h5 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.dark-mode .answer {
+    background-color: #555;
+}
 .timer {
     font-size: 24px;
     font-weight: bold;
