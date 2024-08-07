@@ -7,11 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchStories();
     startTimer();
 
-    document.getElementById('searchInput').addEventListener('input', filterQuestions);
+    document.getElementById('searchBtn').addEventListener('click', filterQuestions);
+    document.getElementById('resetBtn').addEventListener('click', resetFilters);
     document.getElementById('filterBtn').addEventListener('click', toggleFilters);
     document.getElementById('randomBtn').addEventListener('click', showRandomQuestions);
     document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
-    document.getElementById('storiesBtn').addEventListener('click', toggleStories);
+
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.getAttribute('tab'))));
 
     const filterSelects = document.querySelectorAll('.filters select');
     filterSelects.forEach(select => select.addEventListener('change', filterQuestions));
@@ -32,6 +35,7 @@ async function fetchStories() {
     try {
         const response = await fetch('stories.json');
         stories = await response.json();
+        displayStories();
     } catch (error) {
         console.error('Error fetching stories:', error);
     }
@@ -55,6 +59,7 @@ function populateFilters() {
 
 function populateSelect(id, options) {
     const select = document.getElementById(id);
+    select.innerHTML = '<option value="">All</option>';
     options.forEach(option => {
         const optionElement = document.createElement('option');
         optionElement.value = option;
@@ -81,6 +86,8 @@ function displayQuestions(questionsToDisplay) {
                 <p>${question.answers.openai.english || 'No answer available'}</p>
                 <h5>Cantonese:</h5>
                 <p>${question.answers.openai.cantonese || 'No answer available'}</p>
+            </div>
+            <div class="answer">
                 <h4>Claude Answer:</h4>
                 <h5>English:</h5>
                 <p>${question.answers.claude.english || 'No answer available'}</p>
@@ -97,19 +104,25 @@ function filterQuestions() {
     const category = document.getElementById('categoryFilter').value;
     const type = document.getElementById('typeFilter').value;
     const job = document.getElementById('jobFilter').value;
-    const source = document.getElementById('sourceFilter').value;
 
     const filteredQuestions = questions.filter(question => {
         const matchesSearch = question.question.toLowerCase().includes(searchTerm);
         const matchesCategory = category === '' || question.category === category;
         const matchesType = type === '' || question.type === type;
         const matchesJob = job === '' || question.relevantJob === job;
-        const matchesSource = source === '' || (source === 'OpenAI' && question.answers.openai) || (source === 'Claude' && question.answers.claude);
 
-        return matchesSearch && matchesCategory && matchesType && matchesJob && matchesSource;
+        return matchesSearch && matchesCategory && matchesType && matchesJob;
     });
 
     displayQuestions(filteredQuestions);
+}
+
+function resetFilters() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('categoryFilter').value = '';
+    document.getElementById('typeFilter').value = '';
+    document.getElementById('jobFilter').value = '';
+    displayQuestions(questions);
 }
 
 function toggleFilters() {
@@ -135,17 +148,18 @@ function toggleDarkMode() {
     document.body.classList.toggle('dark-mode', darkMode);
 }
 
-function toggleStories() {
-    const questionList = document.getElementById('questionList');
-    const personalStories = document.getElementById('personalStories');
+function switchTab(tabName) {
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.content');
 
-    if (personalStories.style.display === 'none') {
-        questionList.style.display = 'none';
-        personalStories.style.display = 'block';
+    tabs.forEach(tab => tab.classList.remove('active'));
+    contents.forEach(content => content.classList.remove('active'));
+
+    document.querySelector(`.tab[tab="${tabName}"]`).classList.add('active');
+    document.getElementById(`${tabName}Content`).classList.add('active');
+
+    if (tabName === 'stories') {
         displayStories();
-    } else {
-        questionList.style.display = 'block';
-        personalStories.style.display = 'none';
     }
 }
 
