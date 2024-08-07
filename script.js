@@ -76,10 +76,16 @@ function displayQuestions(questionsToDisplay) {
             <p>Type: ${question.type}</p>
             <p>Relevant Job: ${question.relevantJob}</p>
             <div class="answer">
-                <h4>English Answer:</h4>
-                <p>${question.answers.openai.english || question.answers.claude.english || 'No answer available'}</p>
-                <h4>Cantonese Answer:</h4>
-                <p>${question.answers.openai.cantonese || question.answers.claude.cantonese || 'No answer available'}</p>
+                <h4>OpenAI Answer:</h4>
+                <h5>English:</h5>
+                <p>${question.answers.openai.english || 'No answer available'}</p>
+                <h5>Cantonese:</h5>
+                <p>${question.answers.openai.cantonese || 'No answer available'}</p>
+                <h4>Claude Answer:</h4>
+                <h5>English:</h5>
+                <p>${question.answers.claude.english || 'No answer available'}</p>
+                <h5>Cantonese:</h5>
+                <p>${question.answers.claude.cantonese || 'No answer available'}</p>
             </div>
         `;
         questionList.appendChild(questionItem);
@@ -91,7 +97,6 @@ function filterQuestions() {
     const category = document.getElementById('categoryFilter').value;
     const type = document.getElementById('typeFilter').value;
     const job = document.getElementById('jobFilter').value;
-    const language = document.getElementById('languageFilter').value;
     const source = document.getElementById('sourceFilter').value;
 
     const filteredQuestions = questions.filter(question => {
@@ -99,10 +104,9 @@ function filterQuestions() {
         const matchesCategory = category === '' || question.category === category;
         const matchesType = type === '' || question.type === type;
         const matchesJob = job === '' || question.relevantJob === job;
-        const matchesLanguage = language === '' || (language === 'english' && (question.answers.openai.english || question.answers.claude.english)) || (language === 'cantonese' && (question.answers.openai.cantonese || question.answers.claude.cantonese));
-        const matchesSource = source === '' || (source === 'Human' && question.answers.human) || (source === 'OpenAI' && question.answers.openai) || (source === 'Claude' && question.answers.claude);
+        const matchesSource = source === '' || (source === 'OpenAI' && question.answers.openai) || (source === 'Claude' && question.answers.claude);
 
-        return matchesSearch && matchesCategory && matchesType && matchesJob && matchesLanguage && matchesSource;
+        return matchesSearch && matchesCategory && matchesType && matchesJob && matchesSource;
     });
 
     displayQuestions(filteredQuestions);

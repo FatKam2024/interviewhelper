@@ -1243,7 +1243,7 @@
     },
     {
         "id": 70,
-        "question": " motivates you in your professional life?",
+        "question": "How motivates you in your professional life?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1261,7 +1261,7 @@
     },
     {
         "id": 71,
-        "question": "you provide an example of a time when you had to work as part of a team?",
+        "question": "Could you provide an example of a time when you had to work as part of a team?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1279,7 +1279,7 @@
     },
     {
         "id": 72,
-        "question": "do you handle conflicts with colleagues or supervisors?",
+        "question": "How do you handle conflicts with colleagues or supervisors?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1297,7 +1297,7 @@
     },
     {
         "id": 73,
-        "question": "e do you see yourself in five years?",
+        "question": "Where do you see yourself in five years?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1315,7 +1315,7 @@
     },
     {
         "id": 74,
-        "question": "should we hire you over other candidates?",
+        "question": "Why should we hire you over other candidates?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1333,7 +1333,7 @@
     },
     {
         "id": 75,
-        "question": "do you stay updated with the latest trends and technologies in your field?",
+        "question": "How do you stay updated with the latest trends and technologies in your field?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1351,7 +1351,7 @@
     },
     {
         "id": 76,
-        "question": "you describe a time when you had to learn a new skill quickly? How did you approach it?",
+        "question": "Could you describe a time when you had to learn a new skill quickly? How did you approach it?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1369,7 +1369,7 @@
     },
     {
         "id": 77,
-        "question": "do you ensure effective communication in your team?",
+        "question": "How do you ensure effective communication in your team?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1387,7 +1387,7 @@
     },
     {
         "id": 78,
-        "question": "you give an example of a project where you had to take the initiative?",
+        "question": "Could you give an example of a project where you had to take the initiative?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1405,7 +1405,7 @@
     },
     {
         "id": 79,
-        "question": "do you balance your work life and personal life?",
+        "question": "How do you balance your work life and personal life?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1423,7 +1423,7 @@
     },
     {
         "id": 80,
-        "question": " are your salary expectations for this role?",
+        "question": "What are your salary expectations for this role?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1441,7 +1441,7 @@
     },
     {
         "id": 81,
-        "question": "you describe a time when you had to handle confidential information?",
+        "question": "Could you describe a time when you had to handle confidential information?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1459,7 +1459,7 @@
     },
     {
         "id": 82,
-        "question": "do you ensure compliance with company policies and procedures?",
+        "question": "How do you ensure compliance with company policies and procedures?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1477,7 +1477,7 @@
     },
     {
         "id": 83,
-        "question": " kind of management style do you prefer?",
+        "question": "What kind of management style do you prefer?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
@@ -1495,7 +1495,7 @@
     },
     {
         "id": 84,
-        "question": "do you handle feedback and criticism?",
+        "question": "How do you handle feedback and criticism?",
         "category": "HR",
         "type": "HR",
         "relevantJob": "HR",
