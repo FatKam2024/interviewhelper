@@ -83,25 +83,51 @@ select {
     margin-top: 0;
 }
 
-.answer {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #e9e9e9;
-    border-radius: 4px;
+.answer-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
 }
+
+.answer {
+    flex: 1;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.openai-answer {
+    border-left: 4px solid #10a37f;
+}
+
+.claude-answer {
+    border-left: 4px solid #7c3aed;
+}
+
 .answer h4 {
     margin-top: 0;
     margin-bottom: 10px;
+    color: #333;
 }
 
 .answer h5 {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 5px;
+    color: #555;
 }
 
 .dark-mode .answer {
-    background-color: #555;
+    background-color: #2a2a2a;
 }
+
+.dark-mode .answer h4 {
+    color: #e0e0e0;
+}
+
+.dark-mode .answer h5 {
+    color: #c0c0c0;
+}
+
 .timer {
     font-size: 24px;
     font-weight: bold;
@@ -117,10 +143,6 @@ select {
 .dark-mode .question-item {
     background-color: #444;
     border-color: #555;
-}
-
-.dark-mode .answer {
-    background-color: #555;
 }
 
 .tab-container {

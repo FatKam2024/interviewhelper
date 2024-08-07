@@ -80,19 +80,21 @@ function displayQuestions(questionsToDisplay) {
             <p>Category: ${question.category}</p>
             <p>Type: ${question.type}</p>
             <p>Relevant Job: ${question.relevantJob}</p>
-            <div class="answer">
-                <h4>OpenAI Answer:</h4>
-                <h5>English:</h5>
-                <p>${question.answers.openai.english || 'No answer available'}</p>
-                <h5>Cantonese:</h5>
-                <p>${question.answers.openai.cantonese || 'No answer available'}</p>
-            </div>
-            <div class="answer">
-                <h4>Claude Answer:</h4>
-                <h5>English:</h5>
-                <p>${question.answers.claude.english || 'No answer available'}</p>
-                <h5>Cantonese:</h5>
-                <p>${question.answers.claude.cantonese || 'No answer available'}</p>
+            <div class="answer-container">
+                <div class="answer openai-answer">
+                    <h4>OpenAI Answer:</h4>
+                    <h5>English:</h5>
+                    <p>${question.answers.openai.english || 'No answer available'}</p>
+                    <h5>Cantonese:</h5>
+                    <p>${question.answers.openai.cantonese || 'No answer available'}</p>
+                </div>
+                <div class="answer claude-answer">
+                    <h4>Claude Answer:</h4>
+                    <h5>English:</h5>
+                    <p>${question.answers.claude.english || 'No answer available'}</p>
+                    <h5>Cantonese:</h5>
+                    <p>${question.answers.claude.cantonese || 'No answer available'}</p>
+                </div>
             </div>
         `;
         questionList.appendChild(questionItem);
