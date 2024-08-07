@@ -1179,7 +1179,7 @@
         "answers": {
             "openai": {
                 "english": "Refer to Interview Stories part",
-                "cantonese": NaN
+                "cantonese": null
             },
             "claude": {
                 "english": "During a loyalty program project, we encountered a critical issue where VIP members' points went missing during the Christmas period. It was time-sensitive as members needed to use their points before year-end. I worked closely with the development team to find the root cause and implement an urgent fix within a day. We also put in place a permanent solution to prevent future occurrences. This quick response impressed the client and strengthened our relationship.",
