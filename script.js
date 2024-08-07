@@ -1,24 +1,17 @@
 let questions = [];
 let stories = [];
 let darkMode = false;
-let favorites = [];
-let customLists = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchQuestions();
     fetchStories();
     startTimer();
-    loadProgress();
-    loadFavoritesAndCustomLists();
-    initKeyboardShortcuts();
 
     document.getElementById('searchInput').addEventListener('input', filterQuestions);
     document.getElementById('filterBtn').addEventListener('click', toggleFilters);
     document.getElementById('randomBtn').addEventListener('click', showRandomQuestions);
     document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
-
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.dataset.tab)));
+    document.getElementById('storiesBtn').addEventListener('click', toggleStories);
 
     const filterSelects = document.querySelectorAll('.filters select');
     filterSelects.forEach(select => select.addEventListener('change', filterQuestions));
@@ -76,7 +69,7 @@ function displayQuestions(questionsToDisplay) {
 
     questionsToDisplay.forEach(question => {
         const questionItem = document.createElement('div');
-        questionItem.classList.add('question-item', 'fade-in');
+        questionItem.classList.add('question-item');
         questionItem.innerHTML = `
             <h3>${question.question}</h3>
             <p>Category: ${question.category}</p>
@@ -88,12 +81,6 @@ function displayQuestions(questionsToDisplay) {
                 <h4>Cantonese Answer:</h4>
                 <p>${question.answers.openai.cantonese || question.answers.claude.cantonese || 'No answer available'}</p>
             </div>
-            <button class="favorite-btn" onclick="toggleFavorite(${question.id})">
-                ${favorites.includes(question.id) ? 'Remove from Favorites' : 'Add to Favorites'}
-            </button>
-            <button class="complete-btn" onclick="toggleQuestionCompletion(${question.id})">
-                ${question.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
-            </button>
         `;
         questionList.appendChild(questionItem);
     });
@@ -142,21 +129,19 @@ function showRandomQuestions() {
 function toggleDarkMode() {
     darkMode = !darkMode;
     document.body.classList.toggle('dark-mode', darkMode);
-    localStorage.setItem('darkMode', darkMode);
 }
 
-function switchTab(tabName) {
-    const tabs = document.querySelectorAll('.tab');
-    const contents = document.querySelectorAll('.content');
+function toggleStories() {
+    const questionList = document.getElementById('questionList');
+    const personalStories = document.getElementById('personalStories');
 
-    tabs.forEach(tab => tab.classList.remove('active'));
-    contents.forEach(content => content.classList.remove('active'));
-
-    document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
-    document.getElementById(`${tabName}Content`).classList.add('active');
-
-    if (tabName === 'stories') {
+    if (personalStories.style.display === 'none') {
+        questionList.style.display = 'none';
+        personalStories.style.display = 'block';
         displayStories();
+    } else {
+        questionList.style.display = 'block';
+        personalStories.style.display = 'none';
     }
 }
 
@@ -166,7 +151,7 @@ function displayStories() {
 
     stories.forEach(story => {
         const storyItem = document.createElement('div');
-        storyItem.classList.add('story-item', 'fade-in');
+        storyItem.classList.add('story-item');
         storyItem.innerHTML = `
             <h3>${story.title}</h3>
             <p><strong>Situation:</strong> ${story.situation}</p>
@@ -192,101 +177,4 @@ function startTimer() {
 
 function pad(number) {
     return number.toString().padStart(2, '0');
-}
-
-function toggleQuestionCompletion(questionId) {
-    const question = questions.find(q => q.id === questionId);
-    if (question) {
-        question.completed = !question.completed;
-        updateProgressBar();
-        saveProgress();
-    }
-}
-
-function updateProgressBar() {
-    const totalQuestions = questions.length;
-    const completedQuestions = questions.filter(q => q.completed).length;
-    const progressPercentage = (completedQuestions / totalQuestions) * 100;
-
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = `${progressPercentage}%`;
-    progressBar.textContent = `${Math.round(progressPercentage)}%`;
-}
-
-function saveProgress() {
-    localStorage.setItem('interviewPrepProgress', JSON.stringify(questions));
-}
-
-function loadProgress() {
-    const savedProgress = localStorage.getItem('interviewPrepProgress');
-    if (savedProgress) {
-        questions = JSON.parse(savedProgress);
-        updateProgressBar();
-    }
-}
-
-function toggleFavorite(questionId) {
-    const index = favorites.indexOf(questionId);
-    if (index === -1) {
-        favorites.push(questionId);
-    } else {
-        favorites.splice(index, 1);
-    }
-    saveFavorites();
-    updateFavoriteButton(questionId);
-}
-
-function updateFavoriteButton(questionId) {
-    const favoriteBtn = document.querySelector(`.favorite-btn[onclick="toggleFavorite(${questionId})"]`);
-    if (favoriteBtn) {
-        favoriteBtn.textContent = favorites.includes(questionId) ? 'Remove from Favorites' : 'Add to Favorites';
-    }
-}
-
-function saveFavorites() {
-    localStorage.setItem('interviewPrepFavorites', JSON.stringify(favorites));
-}
-
-function loadFavoritesAndCustomLists() {
-    const savedFavorites = localStorage.getItem('interviewPrepFavorites');
-    const savedCustomLists = localStorage.getItem('interviewPrepCustomLists');
-
-    if (savedFavorites) {
-        favorites = JSON.parse(savedFavorites);
-    }
-    if (savedCustomLists) {
-        customLists = JSON.parse(savedCustomLists);
-    }
-}
-
-function initKeyboardShortcuts() {
-    document.addEventListener('keydown', (event) => {
-        if (event.ctrlKey && event.key === 'f') {
-            event.preventDefault();
-            document.getElementById('searchInput').focus();
-        } else if (event.ctrlKey && event.key === 'r') {
-            event.preventDefault();
-            showRandomQuestions();
-        } else if (event.ctrlKey && event.key === 'd') {
-            event.preventDefault();
-            toggleDarkMode();
-        }
-    });
-}
-
-// Advanced search function using Fuse.js
-function advancedSearch(searchTerm, questions) {
-    const fuse = new Fuse(questions, {
-        keys: ['question', 'category', 'type', 'relevantJob'],
-        threshold: 0.4,
-        includeScore: true
-    });
-
-    return fuse.search(searchTerm).map(result => result.item);
-}
-
-// Load dark mode preference on page load
-const savedDarkMode = localStorage.getItem('darkMode');
-if (savedDarkMode === 'true') {
-    toggleDarkMode();
 }
