@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
 
     const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.getAttribute('tab'))));
+    tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.getAttribute('data-tab'))));
 
     const filterSelects = document.querySelectorAll('.filters select');
     filterSelects.forEach(select => select.addEventListener('change', filterQuestions));
@@ -77,9 +77,11 @@ function displayQuestions(questionsToDisplay) {
         questionItem.classList.add('question-item');
         questionItem.innerHTML = `
             <h3>${question.question}</h3>
-            <p>Category: ${question.category}</p>
-            <p>Type: ${question.type}</p>
-            <p>Relevant Job: ${question.relevantJob}</p>
+            <div class="question-details">
+                <p>Category: ${question.category}</p>
+                <p>Type: ${question.type}</p>
+                <p>Relevant Job: ${question.relevantJob}</p>
+            </div>
             <div class="answer-container">
                 <div class="answer openai-answer">
                     <h4>OpenAI Answer:</h4>
@@ -157,7 +159,7 @@ function switchTab(tabName) {
     tabs.forEach(tab => tab.classList.remove('active'));
     contents.forEach(content => content.classList.remove('active'));
 
-    document.querySelector(`.tab[tab="${tabName}"]`).classList.add('active');
+    document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
     document.getElementById(`${tabName}Content`).classList.add('active');
 
     if (tabName === 'stories') {
@@ -174,8 +176,10 @@ function displayStories() {
         storyItem.classList.add('story-item');
         storyItem.innerHTML = `
             <h3>${story.title}</h3>
-            <p><strong>Situation:</strong> ${story.situation}</p>
-            <p><strong>Story:</strong> ${story.story}</p>
+            <div class="story-content">
+                <p><strong>Situation:</strong> ${story.situation}</p>
+                <p><strong>Story:</strong> ${story.story}</p>
+            </div>
         `;
         personalStories.appendChild(storyItem);
     });
