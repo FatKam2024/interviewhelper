@@ -11,9 +11,19 @@
         .collapsible {
             cursor: pointer;
             user-select: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s;
         }
 
-        .question-details {
+        .collapsible:hover {
+            background-color: #eee;
+        }
+
+        .question-details, .story-content {
             display: none;
             margin-top: 10px;
             padding: 10px;
@@ -21,8 +31,28 @@
             border-radius: 4px;
         }
 
-        .question-details.active {
+        .question-details.active, .story-content.active {
             display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-container {
+                margin-bottom: 10px;
+            }
+            .filters {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .filters select, #searchInput, button {
+                width: 100%;
+            }
         }
     </style>
 </head>

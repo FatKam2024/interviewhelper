@@ -113,6 +113,34 @@ function displayQuestions(questionsToDisplay) {
     });
 }
 
+function displayStories() {
+    const personalStories = document.getElementById('personalStories');
+    personalStories.innerHTML = '';
+
+    stories.forEach(story => {
+        const storyItem = document.createElement('div');
+        storyItem.classList.add('story-item');
+
+        const storyHeader = document.createElement('h3');
+        storyHeader.textContent = story.title;
+        storyHeader.classList.add('collapsible');
+        storyHeader.addEventListener('click', () => {
+            storyItem.querySelector('.story-content').classList.toggle('active');
+        });
+
+        const storyContent = document.createElement('div');
+        storyContent.classList.add('story-content');
+        storyContent.innerHTML = `
+            <p><strong>Situation:</strong> ${story.situation}</p>
+            <p><strong>Story:</strong> ${story.story}</p>
+        `;
+
+        storyItem.appendChild(storyHeader);
+        storyItem.appendChild(storyContent);
+        personalStories.appendChild(storyItem);
+    });
+}
+
 function filterQuestions() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const category = document.getElementById('categoryFilter').value;
@@ -175,24 +203,6 @@ function switchTab(tabName) {
     if (tabName === 'stories') {
         displayStories();
     }
-}
-
-function displayStories() {
-    const personalStories = document.getElementById('personalStories');
-    personalStories.innerHTML = '';
-
-    stories.forEach(story => {
-        const storyItem = document.createElement('div');
-        storyItem.classList.add('story-item');
-        storyItem.innerHTML = `
-            <h3>${story.title}</h3>
-            <div class="story-content">
-                <p><strong>Situation:</strong> ${story.situation}</p>
-                <p><strong>Story:</strong> ${story.story}</p>
-            </div>
-        `;
-        personalStories.appendChild(storyItem);
-    });
 }
 
 function startTimer() {
