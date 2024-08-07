@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Prep Master</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interview Prep Master</h1>
+        <div class="top-bar">
+            <input type="text" id="searchInput" placeholder="Search questions...">
+            <div class="controls">
+                <button id="filterBtn">Filters</button>
+                <button id="randomBtn">Random</button>
+                <button id="darkModeBtn">Dark Mode</button>
+                <button id="storiesBtn">Stories</button>
+            </div>
+        </div>
+        <div id="filters" class="filters" style="display: none;">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+            </select>
+            <select id="typeFilter">
+                <option value="">All Types</option>
+            </select>
+            <select id="jobFilter">
+                <option value="">All Jobs</option>
+            </select>
+            <select id="languageFilter">
+                <option value="">All Languages</option>
+                <option value="english">English</option>
+                <option value="cantonese">Cantonese</option>
+            </select>
+            <select id="sourceFilter">
+                <option value="">All Sources</option>
+                <option value="Human">Human</option>
+                <option value="OpenAI">OpenAI</option>
+                <option value="Claude">Claude</option>
+            </select>
+        </div>
+        <div id="timer" class="timer">00:00:00</div>
+        <div id="questionList" class="question-list"></div>
+        <div id="personalStories" class="personal-stories" style="display: none;"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
