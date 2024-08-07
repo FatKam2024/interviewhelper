@@ -83,6 +83,7 @@ select {
     margin-top: 0;
     font-weight: bold;
     cursor: pointer;
+    color: #333; /* Default color for light mode */
 }
 
 .answer-container {
@@ -140,6 +141,10 @@ select {
 
 .dark-mode .answer h5 {
     color: #c0c0c0;
+}
+
+.dark-mode .question-item h3 {
+    color: #ffffff; /* White color for better contrast */
 }
 
 .timer {
@@ -201,11 +206,17 @@ select {
     border-radius: 4px;
     margin-bottom: 5px;
     background-color: #f9f9f9;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    color: #333; /* Default color for light mode */
 }
 
 .collapsible:hover {
     background-color: #eee;
+}
+
+.dark-mode .collapsible {
+    background-color: #3c3c3c;
+    color: #ffffff; /* Ensure text is readable in dark mode */
 }
 
 .question-details, .story-content {
@@ -218,6 +229,11 @@ select {
 
 .question-details.active, .story-content.active {
     display: block;
+}
+
+.dark-mode .question-details, .dark-mode .story-content {
+    background-color: #555;
+    color: #e0e0e0;
 }
 
 @media (max-width: 768px) {
