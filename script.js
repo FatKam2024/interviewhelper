@@ -75,13 +75,20 @@ function displayQuestions(questionsToDisplay) {
     questionsToDisplay.forEach(question => {
         const questionItem = document.createElement('div');
         questionItem.classList.add('question-item');
-        questionItem.innerHTML = `
-            <h3>${question.question}</h3>
-            <div class="question-details">
-                <p>Category: ${question.category}</p>
-                <p>Type: ${question.type}</p>
-                <p>Relevant Job: ${question.relevantJob}</p>
-            </div>
+
+        const questionHeader = document.createElement('h3');
+        questionHeader.textContent = question.question;
+        questionHeader.classList.add('collapsible');
+        questionHeader.addEventListener('click', () => {
+            questionItem.querySelector('.question-details').classList.toggle('active');
+        });
+
+        const questionDetails = document.createElement('div');
+        questionDetails.classList.add('question-details');
+        questionDetails.innerHTML = `
+            <p>Category: ${question.category}</p>
+            <p>Type: ${question.type}</p>
+            <p>Relevant Job: ${question.relevantJob}</p>
             <div class="answer-container">
                 <div class="answer openai-answer">
                     <h4>OpenAI Answer:</h4>
@@ -99,6 +106,9 @@ function displayQuestions(questionsToDisplay) {
                 </div>
             </div>
         `;
+
+        questionItem.appendChild(questionHeader);
+        questionItem.appendChild(questionDetails);
         questionList.appendChild(questionItem);
     });
 }
